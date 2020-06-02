@@ -1,7 +1,10 @@
-node_modules/
-
+# Prevent committing server side files
 kennel.sock
 
+# The per-installation config for flask
+instance/
+
+# Certain static files
 static/.webassets-cache/
 static/gen/
 static/uploads/
