@@ -1,3 +1,22 @@
+kennel.sock
+
+static/.webassets-cache/
+static/gen/
+static/uploads/
+static/canvas/
+
+database/
+tests/
+logs/
+log/
+queued_logs/
+backups/
+
+kennel.wsgi
+certs/
+settings/*.json
+settings/*.yaml
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,3 +146,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+.idea/
