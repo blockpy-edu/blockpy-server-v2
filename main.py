@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, send_from_directory
 
 
 def create_app(test_config=None):
@@ -41,8 +41,12 @@ def create_app(test_config=None):
     #import controllers
 
     # a simple page that says hello
+    @app.route('/<path:path>', methods=['GET'])
+    def static_proxy(path):
+        return send_from_directory('./frontend/dist/frontend/', path)
+
     @app.route('/')
-    def hello():
-        return 'Hello, World!'
+    def root():
+        return send_from_directory('./frontend/dist/frontend/', 'index.html')
 
     return app
