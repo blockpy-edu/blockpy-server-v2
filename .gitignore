@@ -1,3 +1,5 @@
+node_modules/
+
 kennel.sock
 
 static/.webassets-cache/

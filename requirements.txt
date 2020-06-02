@@ -8,6 +8,7 @@ flask-mail
 flask-wtf
 flask-assets
 flask-migrate
+flask_cors
 jinja2
 wtforms
 sqlalchemy
@@ -23,3 +24,4 @@ bcrypt
 python-slugify
 natsort
 psycopg2-binary
+pylti1p3
