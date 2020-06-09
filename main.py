@@ -22,6 +22,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # Load up the database
+    from models import db
+    db.init_app(app)
+
     # Modify Jinja2
     #from controllers.jinja_filters import setup_jinja_filters
 
