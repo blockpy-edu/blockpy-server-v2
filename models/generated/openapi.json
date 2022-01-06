@@ -1,0 +1,114 @@
+{
+  "components": {
+    "schemas": {
+      "Error": {
+        "additionalProperties": false,
+        "properties": {
+          "errors": {
+            "type": "object"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "message"
+        ],
+        "title": "Error",
+        "type": "object"
+      },
+      "UserSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "active": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "confirmed_at": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_created": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_modified": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "first_name": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "last_name": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "proof": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "UserSchema",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "description": "",
+    "title": "My API",
+    "version": "1.0.0"
+  },
+  "openapi": "3.0.2",
+  "paths": {
+    "/v1/user": {
+      "get": {
+        "operationId": "get_users",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserSchema"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "UserSchema"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        }
+      }
+    }
+  }
+}
