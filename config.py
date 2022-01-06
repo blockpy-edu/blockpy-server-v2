@@ -68,3 +68,9 @@ class DevelopmentConfig(DefaultConfig):
     HOST = 'localhost'
     SITE_ROOT_URL = 'localhost:5001'
     SQLALCHEMY_DATABASE_URI = 'sqlite:///instance/main.db'
+
+
+class TestConfig(DefaultConfig):
+    """ Simple test config with in-memory database """
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://:memory:'

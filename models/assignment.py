@@ -30,9 +30,10 @@ class Assignment(Base):
     url = Column(String(255), default=None, nullable=True)
 
     # Settings
-    TYPES = ['blockpy', 'maze']
+    TYPES = ['blockpy', 'maze', 'quiz', 'reading']
     type = Column(String(10), default="blockpy")
     instructions = Column(Text(), default="")
+
     # Should we suggest this assignment's submissions be reviewed manually?
     reviewed = Column(Boolean(), default=False)
     # Should we hide the current Complete status for submissions?
@@ -162,6 +163,7 @@ class Assignment(Base):
                 for assignment in assignments]
 
     @staticmethod
+    # TODO: Rename parameter `type` to be `assignment_type`, or ditch it and provide a custom function
     def new(owner_id: int, course_id: int, type="blockpy", name: str = None, level: str = None) -> 'models.Assignment':
         """ Create a new Assignment for the course and owner. """
         if name is None:

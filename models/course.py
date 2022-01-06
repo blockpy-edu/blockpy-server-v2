@@ -1,10 +1,9 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Text, or_
+from sqlalchemy import Column, String, Integer, ForeignKey, Text, or_, Boolean
 
 import models
-from models.models import db
+from models.models import db, ma
 from models.base import Base
 from common.dates import datetime_to_string, string_to_datetime
-
 
 class Course(Base):
     name = Column(String(255))
@@ -16,6 +15,7 @@ class Course(Base):
     endpoint = Column(Text(), default="")
     VISIBILITIES = ['private', 'public']
     visibility = Column(String(80), default="private")
+    is_default = Column(Boolean(), default=False)
     term = Column(String(255), default="")
     settings = Column(Text(), default="")
 
@@ -192,3 +192,10 @@ class Course(Base):
         assignments = []
         submissions = []
         return assignments, submissions
+
+
+class CourseSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Course
+
+

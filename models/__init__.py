@@ -2,7 +2,7 @@
 The models and database connections
 """
 from flask import Flask
-from models.models import db, migrate
+from models.models import db, migrate, ma
 from models.assignment_tag_membership import assignment_tag_membership
 from models.user import User
 from models.course import Course
@@ -18,7 +18,7 @@ from models.submission import Submission
 from models.sample_submission import SampleSubmission
 
 
-def init_app(app: Flask) -> Flask:
+def init_database(app: Flask) -> Flask:
     """
     Initialize the database.
 
@@ -27,6 +27,7 @@ def init_app(app: Flask) -> Flask:
     """
     db.init_app(app)
     migrate.init_app(app, db)
+    ma.init_app(app)
 
     return app
 

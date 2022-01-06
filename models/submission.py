@@ -13,7 +13,7 @@ from models.assignment import Assignment
 from models.log import Log
 from models.models import db
 from models.base import Base
-from common.dates import datetime_to_string, string_to_datetime
+from common.dates import datetime_to_string
 from common.databases import optional_encoded_field
 from common.filesystem import ensure_dirs
 from models.review import Review
@@ -33,6 +33,7 @@ class SubmissionStatuses:
 
     VALID_CHOICES = (STARTED, IN_PROGRESS, SUBMITTED, COMPLETED)
 
+
 class GradingStatuses:
     FULLY_GRADED = 'FullyGraded'
     PENDING = 'Pending'
@@ -41,6 +42,7 @@ class GradingStatuses:
     NOT_READY = 'NotReady'
 
     VALID_CHOICES = (FULLY_GRADED, PENDING, PENDING_MANUAL, FAILED, NOT_READY)
+
 
 class Submission(Base):
     code = Column(Text(), default="")

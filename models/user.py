@@ -2,7 +2,7 @@ from flask_security import UserMixin
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 
 import models
-from models.models import db
+from models.models import db, ma
 from models.base import Base
 
 
@@ -11,16 +11,18 @@ class User(Base, UserMixin):
     id = Column(Integer(), primary_key=True)
     first_name = Column(String(255))
     last_name = Column(String(255))
+
     email = Column(String(255))
+
     proof = Column(String(255), default='')
     password = Column(String(255))
     active = Column(Boolean())
     confirmed_at = Column(DateTime())
 
     # Foreign key relationships
-    roles = db.relationship("Role", backref='user', lazy='dynamic')
-    authentications = db.relationship("Authentication", backref='user', lazy='dynamic')
-    assignments = db.relationship("Assignment", backref='user', lazy='dynamic')
+    #roles = db.relationship("Role", backref='user', lazy='dynamic')
+    #authentications = db.relationship("Authentication", backref='user', lazy='dynamic')
+    #assignments = db.relationship("Assignment", backref='user', lazy='dynamic')
 
     STAFF_ROLES = ["urn:lti:role:ims/lis/teachingassistant",
                    "instructor", "contentdeveloper", "teachingassistant",
@@ -181,3 +183,10 @@ class User(Base, UserMixin):
                 return User.new_lti_user(service, lti_user_id, lti_email, lti_first_name, lti_last_name)
         else:
             return lti.user
+
+
+class UserSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = User
+        # include_fk = True
+        #load_instance = True
