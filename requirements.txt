@@ -1,4 +1,4 @@
-flask
+flask~=2.0.2
 flask-admin
 flask-sqlalchemy
 flask-marshmallow
@@ -13,9 +13,10 @@ flask_cors
 flask-debugtoolbar
 flask-apispec
 flask-rebar
+flask-jwt-extended
 jinja2
 wtforms
-sqlalchemy
+sqlalchemy~=1.4.27
 marshmallow-sqlalchemy
 
 oauth2
@@ -23,18 +24,19 @@ simplejson
 lxml
 pygments
 httplib2
-tqdm
+tqdm~=4.62.3
 pydot
 six
 bcrypt
 python-slugify
-natsort
+natsort~=8.0.0
 psycopg2-binary
 pylti1p3
-Werkzeug
+Werkzeug~=2.0.2
 email_validator
-click
+click~=8.0.3
 pytest
-celery
-apispec[yaml]
+celery~=5.2.1
+apispec[yaml]~=5.1.1
 apispec-webframeworks
+marshmallow~=3.14.1

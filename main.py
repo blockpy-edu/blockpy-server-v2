@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_jwt_extended import JWTManager
 
 from api_specs import spec
 
@@ -44,6 +45,9 @@ def create_app(test_config=None) -> Flask:
 
     # Turn on Debug Toolbar
     DebugToolbarExtension(app)
+
+    # Set Up JWT
+    jwt = JWTManager(app)
 
     # Modify Jinja2
     # from controllers.jinja_filters import setup_jinja_filters
