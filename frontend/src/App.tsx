@@ -2,12 +2,16 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
 import './App.css';
+import {useGetUsersQuery} from "./store/serverApi";
 
 function App() {
+  const {data, error, isLoading } = useGetUsersQuery();
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <p>{data}</p>
         <Counter />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
