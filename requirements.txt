@@ -19,14 +19,14 @@ wtforms
 sqlalchemy~=1.4.27
 marshmallow-sqlalchemy
 
-oauth2
+oauth2~=1.9.0.post1
 simplejson
 lxml
 pygments
 httplib2
 tqdm~=4.62.3
 pydot
-six
+six~=1.16.0
 bcrypt
 python-slugify
 natsort~=8.0.0

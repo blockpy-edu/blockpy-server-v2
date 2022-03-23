@@ -41,6 +41,14 @@ class DefaultConfig:
     MAIL_USE_SSL = True
     SECURITY_EMAIL_SENDER = "BlockPy Administrator"
 
+    # Debug toolbar settings
+    DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+    # Flask JWT Extended
+    JWT_TOKEN_LOCATION = ["headers", "cookies", "json", "query_string"]
+    JWT_COOKIE_SAMESITE = 'None'
+    JWT_COOKIE_SECURE = True
+
     # User registration stuff
     SECURITY_CONFIRMABLE = True
     SECURITY_REGISTERABLE = True
