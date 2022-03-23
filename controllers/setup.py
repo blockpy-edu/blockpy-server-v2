@@ -1,6 +1,4 @@
-from flask.views import MethodView
-from flask_rebar import errors, Rebar, SwaggerV3Generator
-from flask_apispec import marshal_with, MethodResource, FlaskApiSpec, doc
+from flask_rebar import Rebar, SwaggerV3Generator
 
 rebar = Rebar()
 generator = SwaggerV3Generator()
