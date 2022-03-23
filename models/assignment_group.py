@@ -4,8 +4,8 @@ from natsort import natsorted
 from werkzeug.utils import secure_filename
 
 import models
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string
 from typing import List
 
@@ -141,3 +141,11 @@ class AssignmentGroup(Base):
             return secure_filename(self.url) + ".json"
         else:
             return secure_filename(self.name) + ".json"
+
+
+
+
+class GroupSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = AssignmentGroup
+        include_fk = True

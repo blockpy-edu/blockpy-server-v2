@@ -2,8 +2,8 @@ from flask_security import UserMixin
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
 
 import models
-from models.models import db, ma
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 
 
 class User(Base, UserMixin):
@@ -188,5 +188,5 @@ class User(Base, UserMixin):
 class UserSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = User
-        # include_fk = True
+        include_fk = True
         #load_instance = True

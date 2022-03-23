@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, func, Text, Table, Boolean
 
 import models
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string, string_to_datetime
 from common.databases import optional_encoded_field
 
@@ -85,3 +85,9 @@ class SampleSubmission(Base):
         return (SampleSubmission.query.filter_by(assignment_id=assignment_id)
                 .order_by(SampleSubmission.name)
                 .all())
+
+
+class SampleSubmissionSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = SampleSubmission
+        include_fk = True

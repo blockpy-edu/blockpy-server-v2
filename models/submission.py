@@ -11,8 +11,8 @@ from sqlalchemy.orm import relationship
 import models
 from models.assignment import Assignment
 from models.log import Log
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string
 from common.databases import optional_encoded_field
 from common.filesystem import ensure_dirs
@@ -373,3 +373,9 @@ class Submission(Base):
     def get_meta_reviews():
         return [review.encode_json() for review in
                 Review.query.filter_by(generic=True).all()]
+
+
+class SubmissionSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Submission
+        include_fk = True

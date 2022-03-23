@@ -6,8 +6,8 @@ from sqlalchemy import Column, String, Integer, ForeignKey, Text, func, JSON
 
 from models.assignment import Assignment
 import models
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string, string_to_datetime
 from models.user import User
 
@@ -154,3 +154,9 @@ class Log(Base):
             json.dumps(self.client_timestamp),
             json.dumps(self.client_timezone)
         ))
+
+
+class LogSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Log
+        include_fk = True

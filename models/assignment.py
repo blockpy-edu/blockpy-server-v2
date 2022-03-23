@@ -14,8 +14,8 @@ from slugify import slugify
 import models
 from common.dates import datetime_to_string
 from common.databases import optional_encoded_field
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 
 
 class Assignment(Base):
@@ -40,6 +40,10 @@ class Assignment(Base):
     hidden = Column(Boolean(), default=False)
     # Should we allow users to see other user's submissions?
     public = Column(Boolean(), default=False)
+
+    SECRECY = ["details", "submission", "normal", "none"]
+    secrecy = Column(String(), default="normal")
+
     # Whitelist or blacklist IP address and address ranges
     ip_ranges = Column(Text(), default="")
     # Additional settings stored in a JSON object
@@ -58,6 +62,8 @@ class Assignment(Base):
     forked_version = Column(Integer(), nullable=True)
     owner_id = Column(Integer(), ForeignKey('user.id'))
     course_id = Column(Integer(), ForeignKey('course.id'))
+    group_id = Column(Integer(), ForeignKey('group.id'), nullable=True)
+    group_key = Column(String())
     version = Column(Integer(), default=0)
 
     forked = db.relationship("Assignment")
@@ -363,3 +369,9 @@ class Assignment(Base):
     def has_passcode(self) -> bool:
         """ Identifies whether this assignment has a passcode set. """
         return bool(self.get_setting("passcode", ""))
+
+
+class AssignmentSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Assignment
+        include_fk = True

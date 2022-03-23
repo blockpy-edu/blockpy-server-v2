@@ -1,6 +1,68 @@
 {
   "components": {
     "schemas": {
+      "CourseSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "date_created": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "date_modified": {
+            "format": "date-time",
+            "nullable": true,
+            "type": "string"
+          },
+          "endpoint": {
+            "nullable": true,
+            "type": "string"
+          },
+          "external_id": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "is_default": {
+            "nullable": true,
+            "type": "boolean"
+          },
+          "name": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "service": {
+            "maxLength": 80,
+            "nullable": true,
+            "type": "string"
+          },
+          "settings": {
+            "nullable": true,
+            "type": "string"
+          },
+          "term": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "url": {
+            "maxLength": 255,
+            "nullable": true,
+            "type": "string"
+          },
+          "visibility": {
+            "maxLength": 80,
+            "nullable": true,
+            "type": "string"
+          }
+        },
+        "title": "CourseSchema",
+        "type": "object"
+      },
       "Error": {
         "additionalProperties": false,
         "properties": {
@@ -15,6 +77,23 @@
           "message"
         ],
         "title": "Error",
+        "type": "object"
+      },
+      "LoginSchema": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "title": "LoginSchema",
         "type": "object"
       },
       "UserSchema": {
@@ -80,18 +159,109 @@
   },
   "openapi": "3.0.2",
   "paths": {
-    "/v1/user": {
+    "/v1/course": {
+      "post": {
+        "operationId": "new_course",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CourseSchema"
+                }
+              }
+            },
+            "description": "CourseSchema"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/v1/courses": {
       "get": {
-        "operationId": "get_users",
+        "operationId": "courses",
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
                   "items": {
-                    "$ref": "#/components/schemas/UserSchema"
+                    "$ref": "#/components/schemas/CourseSchema"
                   },
                   "type": "array"
+                }
+              }
+            },
+            "description": "CourseSchema"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/v1/login": {
+      "post": {
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginSchema"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSchema"
+                }
+              }
+            },
+            "description": "UserSchema"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "operationId": "me",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserSchema"
                 }
               }
             },

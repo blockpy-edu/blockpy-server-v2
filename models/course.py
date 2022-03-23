@@ -1,19 +1,28 @@
-from sqlalchemy import Column, String, Integer, ForeignKey, Text, or_, Boolean
+from sqlalchemy import Column, String, Integer, ForeignKey, Text, Boolean
+from marshmallow import fields
 
 import models
-from models.models import db, ma
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string, string_to_datetime
+from models.generics.resources import WithUrl, WithVersion, WithVisibility
 
-class Course(Base):
-    name = Column(String(255))
-    url = Column(String(255), default=None, nullable=True)
-    owner_id = Column(Integer(), ForeignKey('user.id'))
+
+class CourseSettingsSchema(ma.Schema):
+    enforce_dates = fields.Boolean(default=False)
+
+
+class Course(Base, WithUrl, WithVersion, WithVisibility):
     SERVICES = ['native', 'lti']
+    VISIBILITIES = ['private', 'public', 'students', 'teacher']
+    LOG_LEVELS = ['nothing', 'everything', 'errors']
+
+    name = Column(String(255))
+    description = Column(Text())
+    owner_id = Column(Integer(), ForeignKey('user.id'))
     service = Column(String(80), default="native")
     external_id = Column(String(255), default="")
     endpoint = Column(Text(), default="")
-    VISIBILITIES = ['private', 'public']
     visibility = Column(String(80), default="private")
     is_default = Column(Boolean(), default=False)
     term = Column(String(255), default="")
@@ -197,5 +206,6 @@ class Course(Base):
 class CourseSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Course
+        include_fk = True
 
 

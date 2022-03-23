@@ -2,20 +2,21 @@
 The models and database connections
 """
 from flask import Flask
-from models.models import db, migrate, ma
-from models.assignment_tag_membership import assignment_tag_membership
-from models.user import User
-from models.course import Course
-from models.assignment import Assignment
-from models.assignment_tag import AssignmentTag
-from models.assignment_group import AssignmentGroup
+from models.generics.models import db, migrate, ma
+from models.assignment_tag_membership import assignment_tag_membership, AssignmentTagMembershipSchema
+from models.user import User, UserSchema
+from models.course import Course, CourseSchema
+from models.assignment import Assignment, AssignmentSchema
+from models.assignment_tag import AssignmentTag, AssignmentTagSchema
+from models.assignment_group import AssignmentGroup, GroupSchema
 from models.assignment_group_membership import AssignmentGroupMembership
-from models.authentication import Authentication
-from models.log import Log
-from models.role import Role
-from models.review import Review
-from models.submission import Submission
-from models.sample_submission import SampleSubmission
+from models.authentication import Authentication, AuthenticationSchema
+from models.log import Log, LogSchema
+from models.role import Role, RoleSchema
+from models.review import Review, ReviewSchema
+from models.submission import Submission, SubmissionSchema
+from models.sample_submission import SampleSubmission, SampleSubmissionSchema
+from models.grader import Grader, GraderSchema
 
 
 def init_database(app: Flask) -> Flask:

@@ -1,8 +1,8 @@
 from flask_security import RoleMixin
 from sqlalchemy import Column, String, Integer, ForeignKey
 
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 
 
 class Role(Base, RoleMixin):
@@ -28,3 +28,9 @@ class Role(Base, RoleMixin):
     @staticmethod
     def by_course(course_id):
         return Role.query.filter_by(course_id=course_id).all()
+
+
+class RoleSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Role
+        include_fk = True

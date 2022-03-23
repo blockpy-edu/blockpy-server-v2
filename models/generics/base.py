@@ -8,7 +8,7 @@ from sqlalchemy import (Integer, Column, DateTime, func)
 from sqlalchemy.ext.declarative import declared_attr
 
 from common.dates import string_to_datetime, datetime_to_pretty_string
-from models.models import db
+from models.generics.models import db, ma
 
 
 class Base(db.Model):

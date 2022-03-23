@@ -16,7 +16,7 @@ from typing import Type, Union
 from natsort import natsorted
 from werkzeug.utils import secure_filename
 
-from models.models import db
+from models.generics.models import db
 from models.assignment import Assignment
 from models.assignment_group import AssignmentGroup
 from models.assignment_group_membership import AssignmentGroupMembership

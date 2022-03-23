@@ -7,8 +7,8 @@ from flask import url_for
 from sqlalchemy import Column, Text, Integer, Boolean, ForeignKey, Index, func, String
 
 import models
-from models.models import db
-from models.base import Base
+from models.generics.models import db, ma
+from models.generics.base import Base
 from common.dates import datetime_to_string, string_to_datetime
 from common.databases import optional_encoded_field
 from common.filesystem import ensure_dirs
@@ -115,3 +115,10 @@ class Review(Base):
                 return 0
             else:
                 return forked.get_actual_score()
+
+
+
+class ReviewSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = Review
+        include_fk = True
